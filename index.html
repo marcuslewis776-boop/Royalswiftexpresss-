@@ -1,18 +1,108 @@
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Swift Express Logistics</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+  margin:0;
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
+}
+
+/* HEADER */
+header {
+  background:#111c33;
+  padding:20px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* HERO */
+.hero {
+  text-align:center;
+  padding:60px;
+  background:url("https://images.unsplash.com/photo-1601597111158-2fceff292cdc") center/cover;
+}
+
+input, button {
+  padding:10px;
+  margin:5px;
+  border:none;
+  border-radius:6px;
+}
+
+button {
+  background:#00aaff;
+  color:white;
+  cursor:pointer;
+}
+
+/* LOGIN */
+.login {
+  padding:30px;
+  text-align:center;
+}
+
+.box {
+  background:#111c33;
+  padding:20px;
+  width:280px;
+  margin:auto;
+  border-radius:10px;
+}
+
+/* DASHBOARD */
+.dashboard {
+  display:none;
+  padding:20px;
+}
+
+/* FLOATING BUTTONS */
+.telegram, .email {
+  position:fixed;
+  right:20px;
+  padding:12px;
+  border-radius:50%;
+  text-decoration:none;
+  color:white;
+}
+
+.telegram { bottom:20px; background:#0088cc; }
+.email { bottom:80px; background:#ff4d4d; }
+
+/* CHATBOT */
+.chatbot {
+  position:fixed;
+  left:20px;
+  bottom:20px;
+  width:240px;
+  background:#111c33;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.chat-header {
+  background:#00aaff;
+  padding:10px;
+}
+
+.chat-body {
+  height:150px;
+  overflow:auto;
+  padding:10px;
+  font-size:13px;
+}
+</style>
 </head>
+
 <body>
 
-<header>
-  Swift Express Logistics
-</header>
+<header>Swift Express Logistics</header>
 
 <!-- HERO -->
 <section class="hero">
@@ -26,10 +116,10 @@
 <section class="login">
   <div class="box">
     <h3>Login</h3>
-    <input id="user" placeholder="Username">
-    <input id="pass" type="password" placeholder="Password">
+    <input id="user" placeholder="Username"><br>
+    <input id="pass" type="password" placeholder="Password"><br>
     <button onclick="login()">Login</button>
-    <p onclick="resetPass()" class="link">Forgot Password?</p>
+    <p onclick="resetPass()" style="color:#00aaff;cursor:pointer;">Forgot Password?</p>
   </div>
 </section>
 
@@ -43,9 +133,9 @@
   <ul id="list"></ul>
 </section>
 
-<!-- FLOATING BUTTONS -->
-<a class="telegram" href="https://t.me/18323597616" target="_blank">Telegram</a>
-<a class="email" href="mailto:marcuslewis776@gmail.com">Email</a>
+<!-- FLOATING CONTACT -->
+<a class="telegram" href="https://t.me/18323597616" target="_blank">T</a>
+<a class="email" href="mailto:marcuslewis776@gmail.com">E</a>
 
 <!-- CHATBOT -->
 <div class="chatbot">
@@ -54,6 +144,73 @@
   <input id="msg" placeholder="Ask..." onkeydown="if(event.key==='Enter') send()">
 </div>
 
-<script src="script.js"></script>
+<script>
+let db = ["SEL1001","SEL1002"];
+
+function track(){
+let val = document.getElementById("trackInput").value;
+
+if(db.includes(val)){
+document.getElementById("trackResult").innerText =
+"Package is in transit 🚚";
+} else {
+document.getElementById("trackResult").innerText =
+"Tracking not found ❌";
+}
+}
+
+/* LOGIN */
+function login(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u==="admin" && p==="1234"){
+document.querySelector(".login").style.display="none";
+document.getElementById("dash").style.display="block";
+load();
+} else {
+alert("Wrong login");
+}
+}
+
+/* RESET */
+function resetPass(){
+alert("Reset sent to email or Telegram: marcuslewis776@gmail.com / 18323597616");
+}
+
+/* ADD TRACK */
+function addTrack(){
+let val=document.getElementById("newTrack").value;
+db.push(val);
+load();
+}
+
+/* SHOW LIST */
+function load(){
+let list=document.getElementById("list");
+list.innerHTML="";
+db.forEach(t=>{
+list.innerHTML+=`<li>${t}</li>`;
+});
+}
+
+/* CHATBOT */
+function send(){
+let msg=document.getElementById("msg").value;
+let chat=document.getElementById("chat");
+
+let reply="I can help you track shipments.";
+
+if(msg.toLowerCase().includes("track")){
+reply="Enter your tracking number above.";
+}
+
+chat.innerHTML+=`<p><b>You:</b> ${msg}</p>`;
+chat.innerHTML+=`<p><b>AI:</b> ${reply}</p>`;
+
+document.getElementById("msg").value="";
+}
+</script>
+
 </body>
 </html>
