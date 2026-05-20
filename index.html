@@ -1,1 +1,59 @@
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swift Express Logistics</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header>
+  Swift Express Logistics
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Track Your Shipment</h1>
+  <input id="trackInput" placeholder="Enter Tracking Number">
+  <button onclick="track()">Track</button>
+  <p id="trackResult"></p>
+</section>
+
+<!-- LOGIN -->
+<section class="login">
+  <div class="box">
+    <h3>Login</h3>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p onclick="resetPass()" class="link">Forgot Password?</p>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dashboard" id="dash">
+  <h2>Admin Dashboard</h2>
+
+  <input id="newTrack" placeholder="Add Tracking Number">
+  <button onclick="addTrack()">Add</button>
+
+  <ul id="list"></ul>
+</section>
+
+<!-- FLOATING BUTTONS -->
+<a class="telegram" href="https://t.me/18323597616" target="_blank">Telegram</a>
+<a class="email" href="mailto:marcuslewis776@gmail.com">Email</a>
+
+<!-- CHATBOT -->
+<div class="chatbot">
+  <div class="chat-header">AI Support</div>
+  <div id="chat" class="chat-body"></div>
+  <input id="msg" placeholder="Ask..." onkeydown="if(event.key==='Enter') send()">
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
